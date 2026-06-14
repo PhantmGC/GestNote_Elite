@@ -25,13 +25,13 @@
     }
   ],
   "icons": {
-    "48": "icons/logo-48.png",
-    "96": "icons/logo-96.png"
+    "48": "icons/GestNote_Elite-48x48.png",
+    "96": "icons/GestNote_Elite-96x96.png"
   },
   "browser_action": {
     "default_icon": {
-      "48": "icons/logo-48.png",
-      "96": "icons/logo-96.png"
+      "48": "icons/GestNote_Elite-48x48.png",
+      "96": "icons/GestNote_Elite-96x96.png"
     }
   }
 }
