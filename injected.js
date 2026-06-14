@@ -8,7 +8,6 @@
   var FROM_CONTENT = "ugn-content";
 
   function parseValues(str) {
-    // capture le contenu de .setValues([ ... ])
     var m = str.match(/setValues\(\s*\[([^\]]*)\]\s*\)/);
     if (!m) return null;
     return m[1]
@@ -28,7 +27,7 @@
 
     helpDivs.forEach(function (el) {
       try {
-        var fn = el.fnToCall;            // <-- accessible UNIQUEMENT dans le contexte page
+        var fn = el.fnToCall;
         if (typeof fn !== "function") return;
 
         var str = fn.toString();
@@ -37,7 +36,7 @@
 
         results.push({
           helpId: el.id,
-          noteId: el.id.replace(/_help$/, ""),  // "note_33052_help" -> "note_33052"
+          noteId: el.id.replace(/_help$/, ""),
           values: values,
           note: parseNote(str)
         });
@@ -47,8 +46,6 @@
     return results;
   }
 
-  // Les fnToCall ne sont peut-être pas encore posées au tout premier passage :
-  // on réessaie quelques fois.
   function run(attempt) {
     var data = extractAll();
     if (data.length > 0 || attempt >= 12) {
@@ -61,7 +58,6 @@
     }
   }
 
-  // Permet au content script de redemander un scan (ex: tableau rechargé en AJAX)
   window.addEventListener("message", function (event) {
     if (event.source !== window) return;
     var d = event.data;
