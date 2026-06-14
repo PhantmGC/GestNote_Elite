@@ -25,7 +25,13 @@
     }
   ],
   "icons": {
-    "48": "icons/icon-48.png",
-    "96": "icons/icon-96.png"
+    "48": "icons/logo-48.png",
+    "96": "icons/logo-96.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/logo-48.png",
+      "96": "icons/logo-96.png"
+    }
   }
 }
