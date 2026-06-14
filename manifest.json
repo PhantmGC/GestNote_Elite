@@ -25,13 +25,19 @@
     }
   ],
   "icons": {
-    "48": "icons/GestNote_Elite-48x48.png",
-    "96": "icons/GestNote_Elite-96x96.png"
+    "48": "GestNote_Elite-48x48.png",
+    "96": "GestNote_Elite-96x96.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
-      "48": "icons/GestNote_Elite-48x48.png",
-      "96": "icons/GestNote_Elite-96x96.png"
+      "48": "GestNote_Elite-48x48.png",
+      "96": "GestNote_Elite-96x96.png"
     }
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["GestNote_Elite-128x128.png"],
+      "matches": ["https://scolarite.polytech.univ-nantes.fr/*"]
+    }
+  ]
 }
