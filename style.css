@@ -1,0 +1,347 @@
+/* ============================================================
+   Stats Notes — style.css — tous sélecteurs préfixés .ugn-
+   ============================================================ */
+
+/* ---------- Badge moyenne de classe (inline dans la note) ---------- */
+.ugn-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 16px;
+  padding: 0 5px;
+  margin-left: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  color: #1d4ed8;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+/* ---------- Badge rang ---------- */
+.ugn-rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 16px;
+  padding: 0 5px;
+  margin-left: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: system-ui, sans-serif;
+  color: #065f46;
+  background: #d1fae5;
+  border: 1px solid #6ee7b7;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+/* ---------- Bouton graphique ---------- */
+.ugn-chart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 16px;
+  margin-left: 2px;
+  font-size: 9px;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  transition: background .12s, color .12s;
+}
+.ugn-chart-btn:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* ---------- Moyenne de classe UE (style différencié) ---------- */
+.ugn-ue-avg {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: system-ui, sans-serif;
+  color: #7c3aed;
+  background: #ede9fe;
+  border: 1px dashed #c4b5fd;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background .12s, color .12s;
+}
+.ugn-ue-avg:hover {
+  background: #7c3aed;
+  color: #fff;
+  border-color: #7c3aed;
+}
+
+/* ---------- Moyenne générale de classe ---------- */
+.ugn-gen-avg {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: system-ui, sans-serif;
+  color: #9a3412;
+  background: #ffedd5;
+  border: 1px dashed #fb923c;
+  border-radius: 6px;
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background .12s, color .12s;
+}
+.ugn-gen-avg:hover {
+  background: #9a3412;
+  color: #fff;
+  border-color: #9a3412;
+}
+
+/* ---------- Modale graphique ---------- */
+.ugn-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10,20,40,.6);
+  backdrop-filter: blur(3px);
+  font-family: system-ui, sans-serif;
+}
+.ugn-modal {
+  width: 100%;
+  max-width: 620px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.ugn-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+  color: #fff;
+}
+.ugn-modal-title {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 88%;
+}
+.ugn-close {
+  width: 28px; height: 28px;
+  border: none; border-radius: 8px;
+  background: rgba(255,255,255,.18);
+  color: #fff; font-size: 18px; line-height: 1;
+  cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.ugn-close:hover { background: rgba(255,255,255,.35); }
+.ugn-modal-body  { padding: 16px 16px 4px; }
+.ugn-modal-foot  {
+  padding: 8px 18px 14px;
+  font-size: 12px; color: #64748b;
+  text-align: center;
+  border-top: 1px solid #f1f5f9;
+  margin-top: 8px;
+}
+
+/* ---------- Modale détail calcul ---------- */
+.ugn-detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10,20,40,.6);
+  backdrop-filter: blur(3px);
+  font-family: system-ui, sans-serif;
+}
+.ugn-detail-modal {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.ugn-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  background: linear-gradient(135deg, #3b0764 0%, #7c3aed 100%);
+  color: #fff;
+}
+.ugn-detail-title {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 88%;
+}
+.ugn-detail-body {
+  padding: 16px 18px 18px;
+  overflow-x: auto;
+}
+
+/* Tableau de détail */
+.ugn-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: system-ui, sans-serif;
+  font-size: 12px;
+}
+.ugn-detail-table thead tr {
+  background: #f1f5f9;
+  border-bottom: 2px solid #e2e8f0;
+}
+.ugn-detail-table th {
+  padding: 7px 10px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 11px;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.ugn-detail-table th:not(:first-child),
+.ugn-detail-table td.ugn-detail-num {
+  text-align: right;
+}
+.ugn-detail-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background .1s;
+}
+.ugn-detail-table tbody tr:hover {
+  background: #faf5ff;
+}
+.ugn-detail-table tbody tr:last-child {
+  border-bottom: none;
+}
+.ugn-detail-row-na {
+  opacity: 0.45;
+}
+.ugn-detail-matname {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  max-width: 220px;
+}
+.ugn-detail-num {
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #334155;
+  white-space: nowrap;
+}
+.ugn-detail-avg {
+  font-weight: 700;
+  color: #7c3aed;
+}
+.ugn-detail-contrib {
+  color: #64748b;
+  font-style: italic;
+}
+
+/* Sous-liste des évaluations (matières multi-evals) */
+.ugn-detail-evals {
+  margin: 4px 0 0 0;
+  padding: 0 0 0 12px;
+  list-style: disc;
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 400;
+}
+.ugn-detail-evals li {
+  margin: 1px 0;
+}
+
+/* Ligne de résultat */
+.ugn-detail-result {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #faf5ff;
+  border: 1px solid #e9d5ff;
+  border-radius: 8px;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  color: #4c1d95;
+  word-break: break-word;
+}
+.ugn-detail-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #6b21a8;
+}
+.ugn-detail-final {
+  font-size: 16px;
+  font-weight: 800;
+  color: #7c3aed;
+  margin-left: 6px;
+}
+
+/* ---------- SVG ---------- */
+.ugn-svg        { width: 100%; height: auto; display: block; }
+.ugn-plot-bg    { fill: #f8fafc; }
+.ugn-grid       { stroke: #e2e8f0; stroke-width: 1; }
+.ugn-grid-v     { stroke: #f1f5f9; stroke-width: 1; }
+.ugn-axis-lbl   { fill: #94a3b8; font-size: 10px; font-family: system-ui, sans-serif; }
+.ugn-axis-title { fill: #64748b; font-size: 11px; font-weight: 600; font-family: system-ui, sans-serif; }
+.ugn-curve      { fill: none; stroke: #3b82f6; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.ugn-dot        { fill: #fff; stroke: #3b82f6; stroke-width: 2.5; transition: r .1s; pointer-events: none; }
+.ugn-dot-user   { fill: #10b981 !important; stroke: #065f46 !important; pointer-events: none; }
+.ugn-avg-line   { stroke: #f59e0b; stroke-width: 2; stroke-dasharray: 5 4; }
+.ugn-avg-text   { fill: #b45309; font-size: 11px; font-weight: 700; font-family: system-ui, sans-serif; }
+.ugn-user-line  { stroke: #10b981; stroke-width: 2; stroke-dasharray: 5 4; }
+.ugn-user-text  { fill: #059669; font-size: 11px; font-weight: 700; font-family: system-ui, sans-serif; }
+.ugn-hit        { cursor: crosshair; }
+
+/* Tooltip SVG */
+.ugn-tip-bg  { fill: #1e293b; rx: 6; opacity: .92; }
+.ugn-tip-val { fill: #fff; font-size: 11px; font-weight: 700; font-family: system-ui, sans-serif; }
+.ugn-tip-cnt { fill: #94a3b8; font-size: 10px; font-family: system-ui, sans-serif; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .ugn-modal { border-radius: 10px; }
+  .ugn-detail-modal { border-radius: 10px; }
+  .ugn-chart-btn { width: 26px; height: 20px; }
+  .ugn-detail-formula { font-size: 10px; }
+}
+
+.ugn-tooltip-g,
+.ugn-tip-bg,
+.ugn-tip-val,
+.ugn-tip-cnt {
+  pointer-events: none;
+}
