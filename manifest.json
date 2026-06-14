@@ -34,6 +34,51 @@
       "96": "GestNote_Elite-96x96.png"
     }
   },
+  "data_collection_permissions": {
+  "none": true
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["GestNote_Elite-128x128.png"],
+      "matches": ["https://scolarite.polytech.univ-nantes.fr/*"]
+    }
+  ]
+}{
+  "manifest_version": 3,
+  "name": "GestNote Elite",
+  "version": "1.0.0",
+  "description": "Affiche moyenne de classe, rang et histogramme de répartition à partir des données déjà présentes dans la page de notes.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gestnote-elite@exemple.fr",
+      "strict_min_version": "115.0"
+    },
+    "gecko_android": {
+      "strict_min_version": "115.0"
+    }
+  },
+  "host_permissions": [
+    "https://scolarite.polytech.univ-nantes.fr/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://scolarite.polytech.univ-nantes.fr/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "48": "GestNote_Elite-48x48.png",
+    "96": "GestNote_Elite-96x96.png"
+  },
+  "action": {
+    "default_icon": {
+      "48": "GestNote_Elite-48x48.png",
+      "96": "GestNote_Elite-96x96.png"
+    }
+  },
   "web_accessible_resources": [
     {
       "resources": ["GestNote_Elite-128x128.png"],
