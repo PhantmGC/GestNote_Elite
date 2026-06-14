@@ -113,7 +113,6 @@
     var next = parent ? parent.nextElementSibling : null;
     if (!next) return null;
     var txt = (next.textContent || '').trim();
-    // "[Label (N)]" -> "Label (N)"
     return txt.replace(/^\[/, '').replace(/\]$/, '').trim() || null;
   }
 
@@ -208,7 +207,6 @@
         hasUserNote: ueHasUserNote,
         avgUeSpanId: avgUeSpanId,
         matieres: val.matieres,
-        // Détail pour la modale
         _n: n,
         _d: d
       });
@@ -230,8 +228,42 @@
   /* ============================================================
    * UI
    * ============================================================ */
+  function injectLogo() {
+    if (document.getElementById('ugn-logo-banner')) return;
+
+    var img = document.createElement('img');
+    img.id = 'ugn-logo-banner';
+    img.className = 'ugn-logo-img';
+    img.src = chrome.runtime.getURL('GestNote_Elite-128x128.png');
+    img.alt = 'GestNote Elite';
+
+    var headerDiv = null;
+    var imgs = document.querySelectorAll('img');
+    for (var i = 0; i < imgs.length; i++) {
+      var p = imgs[i].parentElement && imgs[i].parentElement.parentElement;
+      if (p && p.querySelector('div[style*="float:right"]')) {
+        headerDiv = p;
+        break;
+      }
+    }
+
+    if (headerDiv) {
+      var wrapper = document.createElement('div');
+      wrapper.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);top:0;display:flex;align-items:center;height:100%;';
+      wrapper.appendChild(img);
+      headerDiv.style.position = 'relative';
+      var clearDiv = headerDiv.querySelector('div[style*="clear"]');
+      headerDiv.insertBefore(wrapper, clearDiv || null);
+    } else {
+      img.style.cssText = 'position:fixed;top:12px;right:12px;z-index:9999;width:64px;height:64px;border-radius:13px;';
+      document.body.appendChild(img);
+    }
+  }
+
   function run(entries) {
     var model = buildModel(entries);
+
+    injectLogo();
 
     model.evals.forEach(function(ev) {
       if (ev.noteEl.dataset.ugnDone==='1') return;
@@ -418,11 +450,9 @@
     table.appendChild(tbody);
     body.appendChild(table);
 
-    // Ligne de résultat
     var result = document.createElement('div');
     result.className = 'ugn-detail-result';
 
-    // Construire la formule
     var parts = matieres_with_data.map(function(m) {
       return m.coefMatiere + ' × ' + fmt(m.classAvgMat);
     });
@@ -758,7 +788,6 @@
    * RESCAN — relance complète après remplacement AJAX du DOM
    * ============================================================ */
   function rescan() {
-    // Supprimer tous les éléments injectés par l'extension
     document.querySelectorAll('.ugn-badge, .ugn-rank, .ugn-chart-btn').forEach(function(el) {
       el.remove();
     });
@@ -784,7 +813,6 @@
    * ============================================================ */
   var _rescanTimer = null;
   var _observer = new MutationObserver(function(mutations) {
-    // On cherche si des nœuds contenant des éléments de notes ont été ajoutés
     var relevant = false;
     for (var i = 0; i < mutations.length; i++) {
       var m = mutations[i];
