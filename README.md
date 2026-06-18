@@ -21,6 +21,7 @@ Et au niveau supérieur :
 ### Depuis AMO (recommandé)
 
 Cherche **GestNote Elite** sur [addons.mozilla.org](https://addons.mozilla.org) et clique sur Ajouter à Firefox.
+Soon : Chrome Web Store
 
 ### Manuellement (dev)
 
@@ -32,7 +33,7 @@ Cherche **GestNote Elite** sur [addons.mozilla.org](https://addons.mozilla.org) 
 ## Compatibilité
 
 - Firefox PC (115+)
-- Firefox Android (115+)
+- Firefox Android (142+)
 
 Fonctionne uniquement sur `scolarite.polytech.univ-nantes.fr`.
 
