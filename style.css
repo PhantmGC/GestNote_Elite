@@ -309,6 +309,25 @@
   color: #7c3aed;
   margin-left: 6px;
 }
+#ugn-credit {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-style: normal;
+  font-family: system-ui, sans-serif;
+  color: #1d4ed8;
+  background: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 4px;
+}
+
+#ugn-credit a {
+  color: #1d4ed8;
+  font-weight: 700;
+  text-decoration: underline;
+}
 
 /* ---------- SVG ---------- */
 .ugn-svg        { width: 100%; height: auto; display: block; }
@@ -344,18 +363,4 @@
 .ugn-tip-val,
 .ugn-tip-cnt {
   pointer-events: none;
-}
-/* ---------- Logo GestNote Elite dans le header ---------- */
-.ugn-logo-td {
-  text-align: center;
-  vertical-align: middle;
-  padding: 0 20px;
-}
-
-.ugn-logo-img {
-  width: 64px;
-  height: 64px;
-  display: block;
-  border-radius: 13px;
-  margin: 0 auto;
 }
