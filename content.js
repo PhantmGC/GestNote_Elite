@@ -229,41 +229,62 @@
    * UI
    * ============================================================ */
   function injectLogo() {
-    if (document.getElementById('ugn-logo-banner')) return;
+    if (document.getElementById('ugn-logo-replaced')) return;
 
-    var img = document.createElement('img');
-    img.id = 'ugn-logo-banner';
-    img.className = 'ugn-logo-img';
-    img.src = chrome.runtime.getURL('GestNote_Elite-128x128.png');
+    var img = document.querySelector('img[src*="gestnote_ico"]');
+    if (!img) return;
+
+    img.id = 'ugn-logo-replaced';
+    img.src = chrome.runtime.getURL('GestNote_Elite-48x48.png');
     img.alt = 'GestNote Elite';
+    img.style.height = '20px';
+    img.style.width = '20px';
+    img.style.borderRadius = '4px';
+    img.style.verticalAlign = 'middle';
+    img.style.marginRight = '10px';
 
-    var headerDiv = null;
-    var imgs = document.querySelectorAll('img');
-    for (var i = 0; i < imgs.length; i++) {
-      var p = imgs[i].parentElement && imgs[i].parentElement.parentElement;
-      if (p && p.querySelector('div[style*="float:right"]')) {
-        headerDiv = p;
+    var label = img.nextElementSibling;
+    if (label && label.textContent.trim() === 'GestNote') {
+      label.textContent = 'GestNote Elite';
+    }
+  }
+
+  function injectCredit() {
+    if (document.getElementById('ugn-credit')) return;
+
+    var candidates = document.querySelectorAll('div[style*="font-style:italic"]');
+    var target = null;
+    for (var i = 0; i < candidates.length; i++) {
+      if (candidates[i].textContent.indexOf('En passant la souris sur une note') !== -1) {
+        target = candidates[i];
         break;
       }
     }
+    if (!target) return;
 
-    if (headerDiv) {
-      var wrapper = document.createElement('div');
-      wrapper.style.cssText = 'position:absolute;left:50%;transform:translateX(-50%);top:0;display:flex;align-items:center;height:100%;';
-      wrapper.appendChild(img);
-      headerDiv.style.position = 'relative';
-      var clearDiv = headerDiv.querySelector('div[style*="clear"]');
-      headerDiv.insertBefore(wrapper, clearDiv || null);
-    } else {
-      img.style.cssText = 'position:fixed;top:12px;right:12px;z-index:9999;width:64px;height:64px;border-radius:13px;';
-      document.body.appendChild(img);
+    var credit = document.createElement('div');
+    credit.id = 'ugn-credit';
+    credit.innerHTML = '<b>GestNote Elite</b> est une extension faite par un étudiant pour les étudiants. ' +
+      'N\'hésitez pas à contacter <a href="mailto:eliot.gateway.dev@gmail.com">eliot.gateway.dev@gmail.com</a> ' +
+      'afin de poser des questions ou proposer des ajouts.';
+
+    var table = document.querySelector('#notetab .selectionMatiereUEMin');
+    if (table) {
+      var w = table.getBoundingClientRect().width;
+      credit.style.width = w + 'px';
+      credit.style.boxSizing = 'border-box';
+      credit.style.marginLeft = 'auto';
+      credit.style.marginRight = 'auto';
     }
+
+    target.parentNode.insertBefore(credit, target.nextSibling);
   }
 
   function run(entries) {
     var model = buildModel(entries);
 
     injectLogo();
+    injectCredit();
 
     model.evals.forEach(function(ev) {
       if (ev.noteEl.dataset.ugnDone==='1') return;
