@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GestNote Elite",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Affiche moyenne de classe, rang et histogramme de r\u00e9partition \u00e0 partir des donn\u00e9es d\u00e9j\u00e0 pr\u00e9sentes dans la page de notes.",
   "browser_specific_settings": {
     "gecko": {
@@ -49,6 +49,8 @@
   "web_accessible_resources": [
     {
       "resources": [
+        "GestNote_Elite-48x48.png",
+        "GestNote_Elite-96x96.png",
         "GestNote_Elite-128x128.png"
       ],
       "matches": [
