@@ -15,62 +15,10 @@
   }
 
   /* ============================================================
-   * INJECTION BLOB
+   * DEMANDE D'EXTRACTION
    * ============================================================ */
-  var pageScriptCode = `
-(function() {
-  var results = [];
-  var helps = document.querySelectorAll('[id^="note_"][id$="_help"]');
-  var total = helps.length;
-  var idx = 0;
-  if (total === 0) {
-    window.postMessage({ source:'ugn-page', type:'NOTES_DATA', payload:[] }, location.origin);
-    return;
-  }
-  var originalEval = window.eval;
-  function processNext() {
-    if (idx >= total) {
-      window.eval = originalEval;
-      window.postMessage({ source:'ugn-page', type:'NOTES_DATA', payload:results }, location.origin);
-      return;
-    }
-    var el = helps[idx++];
-    var fn = el.fnToCall;
-    if (typeof fn !== 'function') { processNext(); return; }
-    var captured = null;
-    window.eval = function(code) { captured = code; return originalEval(code); };
-    try { fn.call(el); } catch(e) {}
-    window.eval = originalEval;
-    if (captured) {
-      var mv = captured.match(/setValues\\(\\s*\\[([^\\]]*)\\]\\s*\\)/);
-      if (mv) {
-        var values = mv[1].split(',')
-          .map(function(s){ return parseFloat(s.trim()); })
-          .filter(function(n){ return !isNaN(n); });
-        if (values.length > 0)
-          results.push({ helpId:el.id, noteId:el.id.replace(/_help$/,''), values:values });
-      }
-    }
-    setTimeout(processNext, 0);
-  }
-  processNext();
-})();
-`;
-
-  function injectViaBlob() {
-    var blob = new Blob([pageScriptCode], {type:'application/javascript'});
-    var url = URL.createObjectURL(blob);
-    var s = document.createElement('script');
-    s.src = url;
-    s.onload = function(){ URL.revokeObjectURL(url); s.remove(); };
-    s.onerror = function(){ URL.revokeObjectURL(url); s.remove(); injectViaInline(); };
-    (document.head||document.documentElement).appendChild(s);
-  }
-  function injectViaInline() {
-    var s = document.createElement('script');
-    s.textContent = pageScriptCode;
-    (document.head||document.documentElement).appendChild(s);
-    s.remove();
+  function requestScan() {
+    window.postMessage({ source:'ugn-content', type:'RESCAN' }, location.origin);
   }
 
   window.addEventListener('message', function(event) {
@@ -826,7 +774,7 @@
       delete el.dataset.ugnGen;
     });
 
-    injectViaBlob();
+    requestScan();
   }
 
   /* ============================================================
@@ -869,6 +817,6 @@
 
   _observer.observe(document.body, { childList: true, subtree: true });
 
-  injectViaBlob();
+  requestScan();
 
 })();
