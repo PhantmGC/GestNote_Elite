@@ -1,4 +1,4 @@
-# GestNote Elite — Firefox & Chrome (un seul manifest, un seul mécanisme)
+# GestNote Elite — Firefox & Chrome
 
 Extension pour le portail de notes de Polytech Nantes qui enrichit l'affichage avec des statistiques de classe calculées à partir des données déjà présentes dans la page. **Même manifest.json et même code** sur Firefox et sur Chrome (comprend Edge, Opera, Brave etc..).
 
