@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "GestNote Elite",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Affiche moyenne de classe, rang et histogramme de r\u00e9partition \u00e0 partir des donn\u00e9es d\u00e9j\u00e0 pr\u00e9sentes dans la page de notes.",
+  "minimum_chrome_version": "111",
   "browser_specific_settings": {
     "gecko": {
       "id": "gestnote-elite@exemple.fr",
-      "strict_min_version": "115.0",
+      "strict_min_version": "128.0",
       "data_collection_permissions": {
         "required": [
           "none"
@@ -22,6 +23,17 @@
     "https://scolarite.polytech.univ-nantes.fr/*"
   ],
   "content_scripts": [
+    {
+      "matches": [
+        "https://scolarite.polytech.univ-nantes.fr/*"
+      ],
+      "js": [
+        "injected.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle",
+      "all_frames": false
+    },
     {
       "matches": [
         "https://scolarite.polytech.univ-nantes.fr/*"
