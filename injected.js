@@ -4,10 +4,11 @@
 (function () {
   "use strict";
 
-  var SOURCE = "ugn-injected";   // signature de nos messages (page -> content)
+  var SOURCE = "ugn-page";       // doit correspondre à ce qu'attend content.js
   var FROM_CONTENT = "ugn-content";
 
   function parseValues(str) {
+    if (!str) return null;
     var m = str.match(/setValues\(\s*\[([^\]]*)\]\s*\)/);
     if (!m) return null;
     return m[1]
@@ -16,33 +17,33 @@
       .filter(function (n) { return !isNaN(n); });
   }
 
-  function parseNote(str) {
-    var m = str.match(/setNote\(\s*([0-9]+(?:[.,][0-9]+)?)\s*\)/);
-    return m ? parseFloat(m[1].replace(",", ".")) : null;
+  function extractOne(el) {
+    var target = el.wrappedJSObject || el;
+    var fn = target.fnToCall;
+    if (typeof fn !== "function") return null;
+    var values = parseValues(fn.toString());
+    if (!values || values.length === 0) {
+      var originalEval = window.eval;
+      var captured = null;
+      window.eval = function (code) { captured = code; return originalEval(code); };
+      try { fn.call(target); } catch (e) { /* ignore */ }
+      window.eval = originalEval;
+      values = parseValues(captured);
+    }
+
+    if (!values || values.length === 0) return null;
+    return { helpId: el.id, noteId: el.id.replace(/_help$/, ""), values: values };
   }
 
   function extractAll() {
     var results = [];
-    var helpDivs = document.querySelectorAll('[id$="_help"]');
-
+    var helpDivs = document.querySelectorAll('[id^="note_"][id$="_help"]');
     helpDivs.forEach(function (el) {
       try {
-        var fn = el.fnToCall;
-        if (typeof fn !== "function") return;
-
-        var str = fn.toString();
-        var values = parseValues(str);
-        if (!values || values.length === 0) return;
-
-        results.push({
-          helpId: el.id,
-          noteId: el.id.replace(/_help$/, ""),
-          values: values,
-          note: parseNote(str)
-        });
+        var entry = extractOne(el);
+        if (entry) results.push(entry);
       } catch (e) { /* on ignore les éléments problématiques */ }
     });
-
     return results;
   }
 
